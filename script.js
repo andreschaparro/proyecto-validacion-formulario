@@ -29,10 +29,10 @@ document.getElementById('formulario').addEventListener('submit', (event) => {
 
     if (entradaNombre.value.trim() === '') {
         divErrorNombre.textContent = 'Por favor, introducí tu nombre'
-        divErrorNombre.classList.add('mensaje-error')
+        divErrorNombre.classList.add('error-messager')
     } else {
         divErrorNombre.textContent = ''
-        divErrorNombre.classList.remove('mensaje-error')
+        divErrorNombre.classList.remove('error-messager')
     }
 
     // Las siguientes líneas validan el campo email utilizando una expresión regular
@@ -42,10 +42,10 @@ document.getElementById('formulario').addEventListener('submit', (event) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailPattern.test(entradaEmail.value)) {
         divErrorEmail.textContent = 'Por favor, introducí un mail válido'
-        divErrorEmail.classList.add('mensaje-error')
+        divErrorEmail.classList.add('error-messager')
     } else {
         divErrorEmail.textContent = ''
-        divErrorEmail.classList.remove('mensaje-error')
+        divErrorEmail.classList.remove('error-messager')
     }
 
     // Las siguientes líneas validan el campo password utilizando una expresión regular
@@ -55,14 +55,14 @@ document.getElementById('formulario').addEventListener('submit', (event) => {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.$($)$-$_])[A-Za-z\d$@$!%*?&#.$($)$-$_]{8,15}$/
     if (!passwordPattern.test(entradaPassword.value)) {
         divErrorPassword.textContent = 'La contraseña debe tener al menos 8 caracteres, números, mayúsculas y minúsculas y caracteres especiales'
-        divErrorPassword.classList.add('mensaje-error')
+        divErrorPassword.classList.add('error-messager')
     } else {
         divErrorPassword.textContent = ''
-        divErrorPassword.classList.remove('mensaje-error')
+        divErrorPassword.classList.remove('error-messager')
     }
 
     // Las siguientes líneas envían el formulario únicamente si los campos son válidos
-    if (!divErrorNombre.textContent && !divErrorEmail.textContent && !divErrorPassword.textContent) {
+    if (divErrorNombre.textContent.length == 0 && divErrorEmail.textContent.length == 0 && divErrorPassword.textContent.length == 0) {
         db.collection("users").add({
             nombre: entradaNombre.value,
             email: entradaEmail.value,
